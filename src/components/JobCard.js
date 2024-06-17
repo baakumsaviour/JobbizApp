@@ -2,11 +2,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const JobCard = ({ job }) => {
+const companyLogos = {
+  'Facebook': require('../../assets/images/facebook.png'),
+  'Google': require('../../assets/images/google.png'),
+  'Burger King': require('../../assets/images/burger_king.png'),
+  'Beats': require('../../assets/images/beats.png'),
+};
+
+const JobCard = ({ job, backgroundColor, color }) => {
+  const logoSource = companyLogos[job.company] || require('../../assets/images/facebook.png');
+
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { backgroundColor }, {color}]}>
       <View style={styles.header}>
-        <Image style={styles.logo} source={require('../../assets/facebook-logo.png')} />
+        <Image style={styles.logo} source={logoSource} />
         <Text style={styles.title}>{job.title}</Text>
       </View>
       <Text style={styles.company}>{job.company}</Text>
@@ -18,7 +27,6 @@ const JobCard = ({ job }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#eaf4ff',
     padding: 20,
     borderRadius: 8,
     marginBottom: 10,

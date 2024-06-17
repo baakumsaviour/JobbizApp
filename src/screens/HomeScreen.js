@@ -7,6 +7,19 @@ import JobCard from '../components/JobCard';
 const HomeScreen = ({ route }) => {
   const { name, email } = route.params;
 
+  const featuredJobs = [
+    { title: 'Software Engineer', company: 'Facebook', salary: '$180,000', location: 'Accra, Ghana', backgroundColor: '#445AFF' },
+    { title: 'Data Scientist', company: 'Google', salary: '$160,000', location: 'New York, US', backgroundColor: '#1D1D55' },
+    // Add more featured jobs here with different background colors
+  ];
+
+  const popularJobs = [
+    { title: 'Jr Executive', company: 'Burger King', salary: '$96,000', location: 'Los Angeles, US' },
+    { title: 'Product Manager', company: 'Beats', salary: '$84,000', location: 'Florida, US' },
+    { title: 'Product Manager', company: 'Facebook', salary: '$86,000', location: 'Florida, US' },
+    // Add more popular jobs here
+  ];
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -16,7 +29,7 @@ const HomeScreen = ({ route }) => {
         </View>
         <Image 
           style={styles.profileImage} 
-          source={require('../../assets/profile-image.jpg')} // Use local image
+          source={require('../../assets/images/profile_picture.png')} // Use local image
         />
       </View>
       <View style={styles.searchContainer}>
@@ -26,16 +39,15 @@ const HomeScreen = ({ route }) => {
 
       <Text style={styles.sectionTitle}>Featured Jobs</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <JobCard job={{ title: 'Software Engineer', company: 'Facebook', salary: '$180,000', location: 'Accra, Ghana' }} />
-        <JobCard job={{ title: 'Data Scientist', company: 'Google', salary: '$160,000', location: 'New York, US' }} />
-        {/* Add more JobCard components here */}
+        {featuredJobs.map((job, index) => (
+          <JobCard key={index} job={job} backgroundColor={job.backgroundColor} color="#fff" />
+        ))}
       </ScrollView>
 
       <Text style={styles.sectionTitle}>Popular Jobs</Text>
-      <JobCard job={{ title: 'Jr Executive', company: 'Burger King', salary: '$96,000', location: 'Los Angeles, US' }} />
-      <JobCard job={{ title: 'Product Manager', company: 'Beats', salary: '$84,000', location: 'Florida, US' }} />
-      <JobCard job={{ title: 'Product Manager', company: 'Facebook', salary: '$86,000', location: 'Florida, US' }} />
-      {/* Add more JobCard components here */}
+      {popularJobs.map((job, index) => (
+        <JobCard key={index} job={job} backgroundColor="transparent" color="" />
+      ))}
     </ScrollView>
   );
 };
@@ -50,6 +62,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+  },
+
+  featuredJobsText: {
+    color: '#fff',
   },
   headerText: {
     flexDirection: 'column',
