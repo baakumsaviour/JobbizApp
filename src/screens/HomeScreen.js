@@ -16,7 +16,7 @@ const HomeScreen = ({ route }) => {
         </View>
         <Image 
           style={styles.profileImage} 
-          source={{ uri: 'https://example.com/path/to/profile-image.jpg' }} 
+          source={require('../../assets/profile-image.jpg')} // Use local image
         />
       </View>
       <View style={styles.searchContainer}>
