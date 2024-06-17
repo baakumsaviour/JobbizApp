@@ -1,19 +1,37 @@
 // src/screens/LoginScreen.js
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleLogin = () => {
+    navigation.navigate('Home', { name, email });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Jobizz</Text>
       <Text style={styles.subtitle}>Welcome Back 👋</Text>
       <Text style={styles.description}>Let's log in. Apply to jobs!</Text>
 
-      <TextInput style={styles.input} placeholder="Name" />
-      <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
+      <TextInput 
+        style={styles.input} 
+        placeholder="Name" 
+        value={name}
+        onChangeText={setName}
+      />
+      <TextInput 
+        style={styles.input} 
+        placeholder="Email" 
+        keyboardType="email-address" 
+        value={email}
+        onChangeText={setEmail}
+      />
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
 
